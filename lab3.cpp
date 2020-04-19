@@ -48,7 +48,7 @@ DWORD WINAPI thread_sequential(LPVOID lpParam)
     BOOL bContinue=TRUE;
     while(bContinue)
     {
-        dwWaitResult = WaitForSingleObject(ghSemaphore,0L);
+        dwWaitResult = WaitForSingleObject(ghSemaphore,60000L);
         switch (dwWaitResult)
         {
             case WAIT_OBJECT_0:
@@ -151,8 +151,6 @@ int lab3_init()
         cout << "CreateThread error: " << GetLastError();
         return 1;
     }
-    WaitForSingleObject(hThread[1], INFINITE);
-    CloseHandle(hThread[1]);
 
     hThread[3] = CreateThread(NULL,0, (LPTHREAD_START_ROUTINE) thread_sequential, (LPVOID)3,  0, &ThreadID);
     if( hThread[3] == NULL )
@@ -160,8 +158,6 @@ int lab3_init()
         cout << "CreateThread error: " << GetLastError();
         return 1;
     }
-    WaitForSingleObject(hThread[3], INFINITE);
-    CloseHandle(hThread[3]);
 
     hThread[4] = CreateThread(NULL,0, (LPTHREAD_START_ROUTINE) thread_sequential, (LPVOID)4,  0, &ThreadID);
     if( hThread[4] == NULL )
@@ -169,8 +165,6 @@ int lab3_init()
         cout << "CreateThread error: " << GetLastError();
         return 1;
     }
-    WaitForSingleObject(hThread[4], INFINITE);
-    CloseHandle(hThread[4]);
 
     hThread[5] = CreateThread(NULL,0, (LPTHREAD_START_ROUTINE) thread_sequential, (LPVOID)5,  0, &ThreadID);
     if( hThread[5] == NULL )
@@ -178,8 +172,6 @@ int lab3_init()
         cout << "CreateThread error: " << GetLastError();
         return 1;
     }
-    WaitForSingleObject(hThread[5], INFINITE);
-    CloseHandle(hThread[5]);
 
     hThread[6] = CreateThread(NULL,0, (LPTHREAD_START_ROUTINE) thread_sequential, (LPVOID)6,  0, &ThreadID);
     if( hThread[6] == NULL )
@@ -187,6 +179,15 @@ int lab3_init()
         cout << "CreateThread error: " << GetLastError();
         return 1;
     }
+
+    WaitForSingleObject(hThread[1], INFINITE);
+    CloseHandle(hThread[1]);
+    WaitForSingleObject(hThread[3], INFINITE);
+    CloseHandle(hThread[3]);
+    WaitForSingleObject(hThread[4], INFINITE);
+    CloseHandle(hThread[4]);
+    WaitForSingleObject(hThread[5], INFINITE);
+    CloseHandle(hThread[5]);
     WaitForSingleObject(hThread[6], INFINITE);
     CloseHandle(hThread[6]);
 
@@ -197,8 +198,6 @@ int lab3_init()
         cout << "CreateThread error: " << GetLastError();
         return 1;
     }
-    WaitForSingleObject(hThread[4], INFINITE);
-    CloseHandle(hThread[4]);
 
     hThread[5] = CreateThread(NULL,0, (LPTHREAD_START_ROUTINE) thread_sequential, (LPVOID)5,  0, &ThreadID);
     if( hThread[5] == NULL )
@@ -206,8 +205,6 @@ int lab3_init()
         cout << "CreateThread error: " << GetLastError();
         return 1;
     }
-    WaitForSingleObject(hThread[5], INFINITE);
-    CloseHandle(hThread[5]);
 
     hThread[6] = CreateThread(NULL,0, (LPTHREAD_START_ROUTINE) thread_sequential, (LPVOID)6,  0, &ThreadID);
     if( hThread[6] == NULL )
@@ -215,8 +212,6 @@ int lab3_init()
         cout << "CreateThread error: " << GetLastError();
         return 1;
     }
-    WaitForSingleObject(hThread[6], INFINITE);
-    CloseHandle(hThread[6]);
 
     hThread[7] = CreateThread(NULL,0, (LPTHREAD_START_ROUTINE) thread_sequential, (LPVOID)7,  0, &ThreadID);
     if( hThread[7] == NULL )
@@ -224,6 +219,13 @@ int lab3_init()
         cout << "CreateThread error: " << GetLastError();
         return 1;
     }
+
+    WaitForSingleObject(hThread[4], INFINITE);
+    CloseHandle(hThread[4]);
+    WaitForSingleObject(hThread[5], INFINITE);
+    CloseHandle(hThread[5]);
+    WaitForSingleObject(hThread[6], INFINITE);
+    CloseHandle(hThread[6]);
     WaitForSingleObject(hThread[7], INFINITE);
     CloseHandle(hThread[7]);
 
@@ -234,8 +236,6 @@ int lab3_init()
         cout << "CreateThread error: " << GetLastError();
         return 1;
     }
-    WaitForSingleObject(hThread[4], INFINITE);
-    CloseHandle(hThread[4]);
 
     hThread[7] = CreateThread(NULL,0, (LPTHREAD_START_ROUTINE) thread_sequential, (LPVOID)7,  0, &ThreadID);
     if( hThread[7] == NULL )
@@ -243,8 +243,6 @@ int lab3_init()
         cout << "CreateThread error: " << GetLastError();
         return 1;
     }
-    WaitForSingleObject(hThread[7], INFINITE);
-    CloseHandle(hThread[7]);
 
     hThread[8] = CreateThread(NULL,0, (LPTHREAD_START_ROUTINE) thread_sequential, (LPVOID)8,  0, &ThreadID);
     if( hThread[8] == NULL )
@@ -252,6 +250,11 @@ int lab3_init()
         cout << "CreateThread error: " << GetLastError();
         return 1;
     }
+
+    WaitForSingleObject(hThread[4], INFINITE);
+    CloseHandle(hThread[4]);
+    WaitForSingleObject(hThread[7], INFINITE);
+    CloseHandle(hThread[7]);
     WaitForSingleObject(hThread[8], INFINITE);
     CloseHandle(hThread[8]);
 
@@ -262,8 +265,6 @@ int lab3_init()
         cout << "CreateThread error: " << GetLastError();
         return 1;
     }
-    WaitForSingleObject(hThread[8], INFINITE);
-    CloseHandle(hThread[8]);
 
     hThread[9] = CreateThread(NULL,0, (LPTHREAD_START_ROUTINE) thread_sequential, (LPVOID)9,  0, &ThreadID);
     if( hThread[9] == NULL )
@@ -271,6 +272,8 @@ int lab3_init()
         cout << "CreateThread error: " << GetLastError();
         return 1;
     }
+    WaitForSingleObject(hThread[8], INFINITE);
+    CloseHandle(hThread[8]);
     WaitForSingleObject(hThread[9], INFINITE);
     CloseHandle(hThread[9]);
 
