@@ -83,6 +83,8 @@ DWORD WINAPI thread_b(LPVOID lpParam)
 
     thread_unsynchronized(1);
 
+    WaitForSingleObject(hThread[2], INFINITE);
+
     hThread[3] = CreateThread(NULL,0, (LPTHREAD_START_ROUTINE) thread_d, NULL,  0, &ThreadID);
     if( hThread[3] == NULL )
         cout << "CreateThread error: " << GetLastError();
