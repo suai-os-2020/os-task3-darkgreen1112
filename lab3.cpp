@@ -59,16 +59,6 @@ DWORD WINAPI thread_a(LPVOID lpParam)
     if( hThread[1] == NULL )
         cout << "CreateThread error: " << GetLastError();
 
-    WaitForSingleObject(hThread[1], INFINITE);
-
-
-    ExitThread(0);
-}
-
-DWORD WINAPI thread_b(LPVOID lpParam)
-{
-    UNREFERENCED_PARAMETER(lpParam);
-
     hThread[2] = CreateThread(NULL,0, (LPTHREAD_START_ROUTINE) thread_c, NULL,  0, &ThreadID);
     if( hThread[2] == NULL )
         cout << "CreateThread error: " << GetLastError();
@@ -80,6 +70,16 @@ DWORD WINAPI thread_b(LPVOID lpParam)
     hThread[5] = CreateThread(NULL,0, (LPTHREAD_START_ROUTINE) thread_f, NULL,  0, &ThreadID);
     if( hThread[5] == NULL )
         cout << "CreateThread error: " << GetLastError();
+
+    WaitForSingleObject(hThread[1], INFINITE);
+    WaitForSingleObject(hThread[4], INFINITE);
+
+    ExitThread(0);
+}
+
+DWORD WINAPI thread_b(LPVOID lpParam)
+{
+    UNREFERENCED_PARAMETER(lpParam);
 
     thread_unsynchronized(1);
 
@@ -94,8 +94,6 @@ DWORD WINAPI thread_b(LPVOID lpParam)
 
     ReleaseSemaphore(semaphoreTable[1], 1,NULL);
     thread_sequential(13);
-
-    WaitForSingleObject(hThread[4], INFINITE);
 
     ExitThread(0);
 }
@@ -124,6 +122,7 @@ DWORD WINAPI thread_e(LPVOID lpParam)
 
     thread_unsynchronized(4);
 
+    WaitForSingleObject(hThread[2], INFINITE);
     thread_sequential(45);
 
     hThread[7] = CreateThread(NULL,0, (LPTHREAD_START_ROUTINE) thread_h, NULL,  0, &ThreadID);
@@ -137,6 +136,7 @@ DWORD WINAPI thread_e(LPVOID lpParam)
     if( hThread[8] == NULL )
         cout << "CreateThread error: " << GetLastError();
 
+    WaitForSingleObject(hThread[5], INFINITE);
     ReleaseSemaphore(semaphoreTable[7], 1,NULL);
     thread_sequential(47);
 
@@ -151,6 +151,7 @@ DWORD WINAPI thread_f(LPVOID lpParam)
 
     thread_unsynchronized(5);
 
+    WaitForSingleObject(hThread[2], INFINITE);
     thread_sequential(56);
 
     thread_sequential(56);
@@ -162,6 +163,7 @@ DWORD WINAPI thread_g(LPVOID lpParam)
 {
     UNREFERENCED_PARAMETER(lpParam);
 
+    WaitForSingleObject(hThread[2], INFINITE);
     thread_sequential(61);
 
     thread_sequential(67);
