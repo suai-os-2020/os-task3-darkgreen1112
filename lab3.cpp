@@ -187,7 +187,7 @@ DWORD WINAPI thread_i(LPVOID lpParam)
     if( hThread[9] == NULL )
         cout << "CreateThread error: " << GetLastError();
 
-    ReleaseSemaphore(semaphoreTable[8], 1,NULL);
+    ReleaseSemaphore(semaphoreTable[9], 1,NULL);
     thread_sequential(89);
 
     WaitForSingleObject(hThread[9], INFINITE);
